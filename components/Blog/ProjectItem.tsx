@@ -3,7 +3,7 @@ import { Project } from "@/types/blog";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSession } from "next-auth/react";
 import Modal from '@/components/Modal';
@@ -18,6 +18,21 @@ function setCookie(name, value, days) {
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
+function getCookie(name) {
+  if (typeof window === 'undefined') {
+    // 서버 사이드에서는 document 객체가 없으므로 바로 null 반환
+    return null;
+  }
+  let nameEQ = name + "=";
+  let ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
 const ProjectItem = ({ project }: { project: Project }) => {
   const { id, title, brief } = project;
   const [bettingAmount, setBettingAmount] = useState(0);
@@ -27,10 +42,20 @@ const ProjectItem = ({ project }: { project: Project }) => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  const [isDisabled, setIsDisabled] = useState(false);
+  useEffect(() => {
+    const proj_ids_str = getCookie("proj_ids");
+    const proj_ids = proj_ids_str ? proj_ids_str.split(",") : [];
+    if (proj_ids.includes(id.toString())) {
+      setIsDisabled(true);
+    }
+  }, [id]);
+
+
   const handleBetting = async () => {
     console.log('배팅 전송, id: ', id, ', amount: ', bettingAmount, ', email: ', session?.user?.email);
     try {
-      const response = await axios.post('http://43.203.146.160:3001/api/bet', {
+      const response = await axios.post('https://api.pickthegold.co.kr/api/bet', {
         proj_id: id, // 배팅하는 항목의 ID
         amount: bettingAmount,
         email: session?.user?.email
@@ -105,7 +130,10 @@ const ProjectItem = ({ project }: { project: Project }) => {
             <button
               type="submit"
               onClick={handleBetting}
-              className="inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary h-10"
+              disabled={isDisabled}
+              className={`inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white ${
+                isDisabled ? 'bg-gray-300' : 'bg-primary hover:bg-primary-dark'
+              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary h-10`}
             >
               <svg
                 className="fill-white"

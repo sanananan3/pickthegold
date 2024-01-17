@@ -19,9 +19,9 @@ const FeaturesTab = () => {
           <div className="animate_top mx-auto text-center">
             <SectionHeader
               headerInfo={{
-                title: `[3주차]`,
-                subtitle: `이번주 금픽`,
-                description: `이번주 몰입캠프 금픽 배팅하기`,
+                title: `[2주차]`,
+                subtitle: `지난주 금픽`,
+                description: `지난주 몰입캠프 금픽 결과`,
               }}
             />
           </div>

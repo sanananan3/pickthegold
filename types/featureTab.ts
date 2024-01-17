@@ -4,5 +4,10 @@ export type FeatureTab = {
   desc1: string;
   desc2: string;
   image: string;
-  imageDark: string;
+  url: string;
+  title2: string;
+  desc12: string;
+  desc22: string;
+  image2: string;
+  url2: string;
 };

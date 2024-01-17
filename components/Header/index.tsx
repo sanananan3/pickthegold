@@ -199,7 +199,7 @@ const Header = () => {
                     <p>남은 자산: {currentBalance}원</p>
                     <button
                       aria-label="SignOut"
-                      onClick={() => { signOut(); deleteCookie("userClass"); deleteCookie("currentBalance"); }}
+                      onClick={() => { signOut(); deleteCookie("userClass"); deleteCookie("currentBalance"); deleteCookie("proj_ids");}}
                       className="flex w-30 items-center justify-center border border-gray rounded-full bg-transparent px-7.5 py-2.5 text-regular text-red-500 duration-300 ease-in-out hover:bg-primaryho hover:text-white"
                     >
                       로그아웃

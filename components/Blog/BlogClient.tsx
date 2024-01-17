@@ -8,7 +8,7 @@ const BlogClient = () => {
 
     async function getProjects() {
         try {
-            const response = await axios.get('http://43.203.146.160:3001/api/getProjects');
+            const response = await axios.get('https://api.pickthegold.co.kr/api/getProjects');
             return response.data;
         } catch (error) {
             // 에러 처리
@@ -19,7 +19,7 @@ const BlogClient = () => {
 
     async function getRealOdds() {
         try {
-            const response = await axios.get('http://43.203.146.160:3001/api/getRealOdds');
+            const response = await axios.get('https://api.pickthegold.co.kr/api/getRealOdds');
             return response.data;
         } catch (error) {
             // 에러 처리

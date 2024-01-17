@@ -15,7 +15,7 @@ const menuData: Menu[] = [
   },
   {
     id: 2.1,
-    title: "이번주 금픽",
+    title: "지난주 금픽",
     newTab: false,
     path: "/feature/camp",
   },

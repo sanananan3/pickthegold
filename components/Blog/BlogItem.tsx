@@ -25,7 +25,7 @@ const BlogItem = ({ blog }: { blog: Blog }) => {
   const handleBetting = async () => {
     console.log('배팅 전송, id: ', _id, ', amount: ', bettingAmount, ', email: ', session?.user?.email);
     try {
-      const response = await axios.post('http://43.203.146.160:3001/api/bet', {
+      const response = await axios.post('https://api.pickthegold.co.kr/api/bet', {
         proj_id: _id, // 배팅하는 항목의 ID
         amount: bettingAmount,
         email: session?.user?.email

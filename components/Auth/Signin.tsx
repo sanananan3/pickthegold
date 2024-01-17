@@ -46,7 +46,7 @@ const Signin = () => {
       const paramData = {
         email: session.user.email
       }
-      axios.post(`http://43.203.146.160:3001/api/checkClass`, paramData)
+      axios.post(`https://api.pickthegold.co.kr/api/checkClass`, paramData)
         .then(response => {
           // 성공적인 응답 처리
           console.log("분반 정보를 불러왔습니다.");
@@ -67,6 +67,8 @@ const Signin = () => {
             setCookie("currentBalance", currentBalance, 7);
             setCookie("proj_ids", proj_ids_str, 7);
             console.log(userClass);
+            console.log(currentBalance);
+            console.log(proj_ids_str);
             window.location.href = "/";
           }
         })
