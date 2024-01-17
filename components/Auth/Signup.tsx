@@ -8,6 +8,16 @@ import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
 import validateEmail from "@/app/libs/validate";
 
+function setCookie(name, value, days) {
+  let expires = "";
+  if (days) {
+    let date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
 const Signup = () => {
   const [data, setData] = useState({
     email: "",
@@ -27,7 +37,7 @@ const Signup = () => {
     e.preventDefault();
 
     if (!email || !userClass) {
-      return toast.error("Something went wrong!");
+      return toast.error("뭔가 잘못되었습니다!");
     }
 
     axios
@@ -37,14 +47,16 @@ const Signup = () => {
         nickname
       })
       .then(() => {
-        toast.success("User has been registered");
+        toast.success("회원가입이 성공적으로 완료되었습니다!");
         setData({
           email: "",
           userClass: "",
           nickname: ""
         });
+        setCookie("userClass", userClass, 7);
+        window.location.href = "/";
       })
-      .catch(() => toast.error("Something went wrong!!!"));
+      .catch(() => toast.error("뭔가 아주 잘못되었습니다!!!"));
   };
 
   const signinWithMail = () => {

@@ -17,3 +17,16 @@ export type Blog = {
   tags?: string[];
   publishedAt?: string;
 };
+
+export type Project = {
+  id: number,
+  week?: number,
+  class?: number,
+  member_1?: string,
+  member_2?: string,
+  member_3?: string,
+  brief?: string,
+  readme?: string,
+  title: string,
+  giturl: string
+}

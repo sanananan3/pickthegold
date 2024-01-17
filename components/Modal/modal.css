@@ -1,0 +1,68 @@
+/* modal.css */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    z-index: 1001;
+    color: #111;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    /* 또는 적절한 너비 */
+    max-height: 80vh;
+    /* 전체 창의 높이의 80% */
+    overflow-y: auto;
+}
+
+.modal-content h1 {
+    font-size: 2em;
+    /* 더 큰 글씨 크기 */
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.modal-content h2 {
+    font-size: 1.5em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+}
+
+.modal-content h3 {
+    font-size: 1.2em;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+}
+
+.close-button {
+    position: absolute;
+    /* 절대적 위치 지정 */
+    top: 15px;
+    /* 위쪽에서 10px 떨어진 곳에 위치 */
+    right: 15px;
+    /* 왼쪽에서 10px 떨어진 곳에 위치 */
+    /* 버튼 스타일 */
+}
+
+ul {
+    /* 목록 스타일 */
+    padding: 0;
+    list-style: none;
+}
+
+.markdown-body {
+    /* 마크다운 스타일 */
+    margin-top: 20px;
+}

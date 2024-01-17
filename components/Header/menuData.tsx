@@ -19,12 +19,12 @@ const menuData: Menu[] = [
     newTab: false,
     path: "/feature/camp",
   },
-  {
-    id: 3,
-    title: "나의 플젝",
-    newTab: false,
-    path: "/docs",
-  },
+  // {
+  //   id: 3,
+  //   title: "나의 플젝",
+  //   newTab: false,
+  //   path: "/docs",
+  // },
   // {
   //   id: 3,
   //   title: "Pages",

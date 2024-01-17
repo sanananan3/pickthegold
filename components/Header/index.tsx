@@ -6,11 +6,36 @@ import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
+import "./dropdown.css";
+
+function getCookie(name) {
+  if (typeof window === 'undefined') {
+    // 서버 사이드에서는 document 객체가 없으므로 바로 null 반환
+    return null;
+  }
+  let nameEQ = name + "=";
+  let ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
+function deleteCookie(name) {
+  // 쿠키의 만료 날짜를 과거로 설정하여 삭제
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+}
 
 const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [dropdownToggler, setDropdownToggler] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownToggler(!dropdownToggler);
+  };
 
   const { data: session } = useSession();
   console.log(session);
@@ -24,6 +49,9 @@ const Header = () => {
       setStickyMenu(false);
     }
   };
+
+  let userClass = getCookie("userClass");
+  let currentBalance = getCookie("currentBalance");
 
   useEffect(() => {
     window.addEventListener("scroll", handleStickyMenu);
@@ -157,14 +185,35 @@ const Header = () => {
             </Link> */}
             {session ? (
               <>
-                <p>{session?.user?.name}</p>
                 <button
+                  className="flex items-center justify-center rounded-full bg-primary px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primaryho"
+                  onClick={toggleDropdown}>
+                  내 정보
+                </button>
+                {dropdownToggler && (
+                  <div className="dropdown-profile">
+                    {/* 드롭다운 메뉴 내용 */}
+                    <h2 className="text-black text-xl"><b>{session?.user?.name}</b>님,</h2>
+                    <h3 className="text-black">안녕하세요</h3>
+                    <p>[3주차] {userClass}분반</p>
+                    <p>남은 자산: {currentBalance}원</p>
+                    <button
+                      aria-label="SignOut"
+                      onClick={() => { signOut(); deleteCookie("userClass"); deleteCookie("currentBalance"); }}
+                      className="flex w-30 items-center justify-center border border-gray rounded-full bg-transparent px-7.5 py-2.5 text-regular text-red-500 duration-300 ease-in-out hover:bg-primaryho hover:text-white"
+                    >
+                      로그아웃
+                    </button>
+
+                  </div>
+                )}
+                {/* <button
                   aria-label="SignOut"
-                  onClick={() => signOut()}
+                  onClick={() => { signOut(); deleteCookie("userClass"); }}
                   className="flex items-center justify-center rounded-full bg-primary px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primaryho"
                 >
                   로그아웃
-                </button>
+                </button> */}
               </>
             ) : (
               <>

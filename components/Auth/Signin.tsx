@@ -6,6 +6,25 @@ import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { signIn, useSession } from "next-auth/react";
 import validateEmail from "@/app/libs/validate";
+import axios from "axios";
+
+function setCookie(name, value, days) {
+  let expires = "";
+  if (days) {
+    let date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+const handleKakao = () => {
+  const kakaoButton = document.getElementById('kakao-login-btn');
+  console.log(kakaoButton);
+  if (kakaoButton) {
+    kakaoButton.classList.add('fade-out');
+  }
+};
 
 const Signin = () => {
   const [data, setData] = useState({
@@ -19,9 +38,40 @@ const Signin = () => {
   const [email, SetEmail] = useState("");
 
   useEffect(() => {
+    // console.log("여기가 세션이란다");
+    // console.log(session);
     if (session) {
+      console.log("로그인 성공!");
       console.log(session.user);
-      window.location.href = "/";
+      const paramData = {
+        email: session.user.email
+      }
+      axios.post(`http://43.203.146.160:3001/api/checkClass`, paramData)
+        .then(response => {
+          // 성공적인 응답 처리
+          console.log("분반 정보를 불러왔습니다.");
+          console.log(response.data);
+          console.log(response.data.userclass);
+          let userClass = response.data.userclass;
+          console.log(response.data.balance);
+          let currentBalance = response.data.balance;
+          console.log(response.data.proj_ids);
+          let proj_ids = response.data.proj_ids;
+          // if (userClass == null) {
+          //   console.log("분반 정보가 없습니다!");
+          //   window.location.href = "/auth/signup";
+          // } else {
+          //   console.log("분반 정보가 있어요~");
+          //   setCookie("userClass", userClass, 7);
+          //   setCookie("currentBalance", currentBalance, 7);
+          //   console.log(userClass);
+          //   window.location.href = "/";
+          // }
+        })
+        .catch(error => {
+          // 오류 처리
+          console.error('There was an error!', error);
+        });
     }
   }, [session]);
 
@@ -230,8 +280,9 @@ const Signin = () => {
               </div>
               <div className="flex items-center gap-8">
                 <button
-                  aria-label="sign with google"
-                  onClick={() => signIn("kakao")}
+                  id="kakao-login-btn"
+                  aria-label="sign with kakao"
+                  onClick={() => handleKakao}
                   className="text-body-color dark:text-body-color-dark dark:shadow-two mb-6 flex w-full items-center justify-center rounded-sm border border-stroke bg-[#f8f8f8] px-6 py-3 text-base outline-none transition-all duration-300 hover:border-primary hover:bg-primary/5 hover:text-primary dark:border-transparent dark:bg-[#2C303B] dark:hover:border-primary dark:hover:bg-primary/5 dark:hover:text-primary dark:hover:shadow-none"
                 >
                   <span className="mr-3">
@@ -292,12 +343,10 @@ const Signin = () => {
             <div className="mt-12.5 border-t border-stroke py-5 text-center dark:border-strokedark">
               <p>
                 계정이 없으신가요?{" "}
-                <Link
-                  className="text-black hover:text-primary dark:text-white hover:dark:text-primary"
-                  href="/auth/signup"
-                >
-                  회원가입하기
-                </Link>
+                <text className="text-black hover:text-primary dark:text-white hover:dark:text-primary">
+                  그냥 로그인하세요
+                </text>
+
               </p>
             </div>
           </motion.div>

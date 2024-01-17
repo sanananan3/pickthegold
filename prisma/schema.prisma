@@ -1,10 +1,10 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model Account {
@@ -20,10 +20,10 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId], map: "Account_userId_fkey")
 }
 
 model Session {
@@ -32,12 +32,14 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Session_userId_fkey")
 }
 
 model User {
   id                    String    @id @default(cuid())
   name                  String?
-  email                 String?   @unique
+  email                 String?   @unique @db.VarChar(255)
   emailVerified         DateTime?
   image                 String?
   password              String?
@@ -45,6 +47,7 @@ model User {
   nickname              String?
   passwordResetToken    String?   @unique
   passwordResetTokenExp DateTime?
+  balance               Int?      @default(100000)
   accounts              Account[]
   sessions              Session[]
 }
@@ -56,4 +59,36 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Bet {
+  proj_id Int
+  email   String @db.VarChar(255)
+  amount  Int
+
+  @@id([email, proj_id])
+}
+
+model Odds {
+  id_total Int
+  odds_id  Int @id
+}
+
+model Result {
+  result_id Int      @id
+  end_time  DateTime @db.DateTime(0)
+  pick      Int      @db.TinyInt
+}
+
+model project {
+  id       Int     @id @default(autoincrement())
+  week     Int?
+  class    Int?
+  member_1 String? @db.VarChar(255)
+  member_2 String? @db.VarChar(255)
+  member_3 String? @db.VarChar(255)
+  brief    String? @db.Text
+  readme   String? @db.Text
+  title    String? @db.Text
+  giturl   String? @db.Text
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { FeatureTab } from "@/types/featureTab";
 import Image from "next/image";
+import About from "@/components/About";
 
 const FeaturesTabItem = ({ featureTab }: { featureTab: FeatureTab }) => {
   const { title, desc1, desc2, image, imageDark } = featureTab;
@@ -22,9 +23,12 @@ const FeaturesTabItem = ({ featureTab }: { featureTab: FeatureTab }) => {
             alt={title}
             fill
             className="hidden dark:block"
+
           />
         </div>
       </div>
+
+      {/* <About /> */}
     </>
   );
 };
