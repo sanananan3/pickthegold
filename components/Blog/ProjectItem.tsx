@@ -68,6 +68,20 @@ const ProjectItem = ({ project }: { project: Project }) => {
     } catch (error) {
       console.error('배팅 전송 실패:', error);
     }
+    // 쿠키에서 proj_ids 값을 가져옵니다
+    const proj_ids_str = getCookie("proj_ids");
+    const proj_ids = proj_ids_str ? proj_ids_str.split(",") : [];
+
+    // 새로운 id 값을 추가합니다
+    const newId = id.toString(); // 예시로 사용할 id, 실제로는 필요한 id 값을 사용하세요
+    if (!proj_ids.includes(newId)) {
+      proj_ids.push(newId);
+    }
+
+    // 새로운 배열을 문자열로 변환하여 쿠키에 저장합니다
+    const updated_proj_ids_str = proj_ids.join(",");
+    setCookie("proj_ids", updated_proj_ids_str, 7);
+    setIsDisabled(true);
   };
   return (
     <>
@@ -131,9 +145,8 @@ const ProjectItem = ({ project }: { project: Project }) => {
               type="submit"
               onClick={handleBetting}
               disabled={isDisabled}
-              className={`inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white ${
-                isDisabled ? 'bg-gray-300' : 'bg-primary hover:bg-primary-dark'
-              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary h-10`}
+              className={`inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white ${isDisabled ? 'bg-gray-300' : 'bg-primary hover:bg-primary-dark'
+                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary h-10`}
             >
               <svg
                 className="fill-white"

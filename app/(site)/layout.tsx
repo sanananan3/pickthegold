@@ -62,7 +62,7 @@ export default function RootLayout({
             <ToasterContext />
             {children}
             <EndingModal
-              announcement={announcement}
+              updatedBalance={announcement}
               isOpen={showModal}
               onClose={() => setShowModal(false)}
             />

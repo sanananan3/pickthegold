@@ -81,6 +81,7 @@ const Blog = async () => {
 
   async function getProjects() {
     try {
+      // const response = await axios.get('https://api.pickthegold.co.kr/api/getProjects');
       const response = await axios.get('https://api.pickthegold.co.kr/api/getProjects');
       return response.data;
     } catch (error) {
@@ -92,6 +93,7 @@ const Blog = async () => {
 
   async function getRealOdds() {
     try {
+      // const response = await axios.get('https://api.pickthegold.co.kr/api/getRealOdds');
       const response = await axios.get('https://api.pickthegold.co.kr/api/getRealOdds');
       return response.data;
     } catch (error) {
@@ -103,7 +105,7 @@ const Blog = async () => {
 
   // async function getTopThree() {
   //   try {
-  //     const response = await axios.get('http://43.203.146.160:3001/api/getTopThree');
+  //     const response = await axios.get('https://api.pickthegold.co.kr/api/getTopThree');
   //     return response.data;
   //   } catch (error) {
   //     // 에러 처리
@@ -116,7 +118,7 @@ const Blog = async () => {
   //     const paramData = {
   //       class: 2
   //     }
-  //     axios.post(`http://43.203.146.160:3001/api/getProjects`, paramData)
+  //     axios.post(`https://api.pickthegold.co.kr/api/getProjects`, paramData)
   //       .then(response => {
   //         // 성공적인 응답 처리
   //         console.log("프로젝트 정보를 불러왔습니다.");

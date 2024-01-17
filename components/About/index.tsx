@@ -59,7 +59,7 @@ const About = ({ featureTab }: { featureTab: FeatureTab }) => {
                 <span className="mb-4 mr-4 inline-flex rounded-full bg-meta px-4.5 py-1 text-metatitle uppercase text-white ">
                   금픽
                 </span>{" "}
-                {featureTab.desc1}
+                <p className="text-black">{featureTab.desc1}</p>
               </span>
               <h2 className="relative mb-6 text-3xl font-bold text-black dark:text-white xl:text-hero">
                 {featureTab.title}
@@ -116,14 +116,14 @@ const About = ({ featureTab }: { featureTab: FeatureTab }) => {
               <span className="font-medium uppercase text-black dark:text-white">
                 <span className="mb-4 mr-4 inline-flex rounded-full bg-meta px-4.5 py-1 text-metatitle uppercase text-white ">
                   금픽
-                </span>{" "}
-                {featureTab.desc1}
+                </span>
+                <p className="text-black">{featureTab.desc12}</p>
               </span>
               <h2 className="relative mb-6 text-3xl font-bold text-black dark:text-white xl:text-hero">
-                {featureTab.title}
+                {featureTab.title2}
               </h2>
               <p>
-                {featureTab.desc2}
+                {featureTab.desc22}
               </p>
               <div>
                 <a

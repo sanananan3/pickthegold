@@ -1,0 +1,32 @@
+/* CSS 예시 */
+@keyframes sparkle {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.sparkle-animation {
+    animation: sparkle 1s ease-in-out;
+}
+
+@keyframes bomb {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.bomb-animation {
+    animation: bomb 1s ease-in-out;
+}

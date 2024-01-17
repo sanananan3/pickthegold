@@ -7,6 +7,7 @@ import { signOut, useSession } from "next-auth/react";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 import "./dropdown.css";
+import axios from "axios";
 
 function getCookie(name) {
   if (typeof window === 'undefined') {
@@ -40,6 +41,24 @@ const Header = () => {
   const { data: session } = useSession();
   console.log(session);
   const pathUrl = usePathname();
+
+  const controlAdmin = () => {
+    const now = new Date();
+    const paramData = {
+      time: now
+    }
+    axios.post(`https://api.pickthegold.co.kr/api/betResult`, paramData)
+      .then(response => {
+        // 성공적인 응답 처리
+        console.log("결과 처리가 완료되었습니다.");
+        console.log(response.data);
+
+      })
+      .catch(error => {
+        // 오류 처리
+        console.error('There was an error!', error);
+      });
+  };
 
   // Sticky menu
   const handleStickyMenu = () => {
@@ -199,11 +218,20 @@ const Header = () => {
                     <p>남은 자산: {currentBalance}원</p>
                     <button
                       aria-label="SignOut"
-                      onClick={() => { signOut(); deleteCookie("userClass"); deleteCookie("currentBalance"); deleteCookie("proj_ids");}}
+                      onClick={() => { signOut(); deleteCookie("userClass"); deleteCookie("currentBalance"); deleteCookie("proj_ids"); }}
                       className="flex w-30 items-center justify-center border border-gray rounded-full bg-transparent px-7.5 py-2.5 text-regular text-red-500 duration-300 ease-in-out hover:bg-primaryho hover:text-white"
                     >
                       로그아웃
                     </button>
+
+                    {(session?.user?.name === "naco0406" && userClass === '0') && (
+                      <button
+                        onClick={controlAdmin}
+                        className="mt-4 flex items-center justify-center border border-gray rounded-full bg-primary px-7.5 py-2.5 text-regular text-white hover:bg-primary-dark"
+                      >
+                        어드민 페이지
+                      </button>
+                    )}
 
                   </div>
                 )}

@@ -20,8 +20,8 @@ const PricingClient = () => {
 
     async function getRealOdds() {
         try {
-            // const response = await axios.get('http://43.203.146.160:3001/api/getRealOdds');
             const response = await axios.get('https://api.pickthegold.co.kr/api/getRealOdds');
+            // const response = await axios.get('https://api.pickthegold.co.kr/api/getRealOdds');
             return response.data;
         } catch (error) {
             // 에러 처리
@@ -31,7 +31,7 @@ const PricingClient = () => {
     }
     async function getTopThree() {
         try {
-            // const response = await axios.get('http://43.203.146.160:3001/api/getTopThree');
+            // const response = await axios.get('https://api.pickthegold.co.kr/api/getTopThree');
             const response = await axios.get('https://api.pickthegold.co.kr/api/getTopThree');
             return response.data;
         } catch (error) {
