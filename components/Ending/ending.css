@@ -1,32 +1,79 @@
-/* CSS 예시 */
-@keyframes sparkle {
-    from {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+.modal-ending {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.sparkle-animation {
-    animation: sparkle 1s ease-in-out;
+.modal-endingbackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-@keyframes bomb {
-    from {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    to {
-        transform: scale(0);
-        opacity: 0;
-    }
+.modal-endingemoji {
+    font-size: 500px;
+    /* 이모티콘 크기 설정 */
+    position: fixed;
+    /* 고정 위치 */
+    top: 50%;
+    /* 상단에서 50% 위치 */
+    left: 50%;
+    /* 왼쪽에서 50% 위치 */
+    transform: translate(-50%, -50%);
+    /* 정 가운데 정렬 */
 }
 
-.bomb-animation {
-    animation: bomb 1s ease-in-out;
+.modal-endingcontent {
+    position: relative;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    z-index: 1001;
+    color: #111;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    /* 또는 적절한 너비 */
+    height: 80vh;
+    /* 전체 창의 높이의 80% */
+    overflow-y: auto;
 }
+
+.endingtable {
+    width: 100%; /* 테이블의 전체 너비를 사용 */
+    border-collapse: collapse; /* 셀 사이의 간격 제거 */
+  }
+  
+  .endingtable th,
+  .endingtable td {
+    padding: 15px; /* 셀의 패딩 */
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    border-bottom: 1px solid #ddd; /* 셀 하단에 경계선 */
+  }
+  
+  .endingtable th {
+    background-color: #f2f2f2; /* 헤더 배경색 */
+    color: black; /* 헤더 텍스트 색상 */
+  }
+  
+  .endingtable tr:hover {
+    background-color: #f5f5f5; /* 마우스 오버 시 행 배경색 변경 */
+  }
+  
+  .endingtable td {
+    font-size: 16px; /* 셀 텍스트 크기 */
+  }
+  

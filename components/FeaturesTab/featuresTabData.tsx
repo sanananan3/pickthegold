@@ -50,7 +50,7 @@ const featuresTabData: FeatureTab[] = [
     title2: `DROP!`,
     desc12: `카이스트 공연 예약 시스템 Drop!`,
     desc22: `카이스트 내의 버스킹 정보를 날짜 별로 볼 수 있으며, 버스킹 일정을 즐겨찾기에 등록할 수 있다. 또한 애플리케이션 사용자가 버스킹 일정을 등록하고 마이페이지 정보를 수정할 수 있으며, 공연 관람 시간에 따른 레벨이 존재한다.`,
-    image2: "/images/pregold/4/2.png",
+    image2: "/images/pregold/4/2.jpg",
     url2: "https://github.com/kimseongah/MadCamp_week2",
   },
 ];

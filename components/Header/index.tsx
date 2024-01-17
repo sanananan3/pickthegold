@@ -229,7 +229,7 @@ const Header = () => {
                         onClick={controlAdmin}
                         className="mt-4 flex items-center justify-center border border-gray rounded-full bg-primary px-7.5 py-2.5 text-regular text-white hover:bg-primary-dark"
                       >
-                        어드민 페이지
+                        결과 정산하기
                       </button>
                     )}
 
