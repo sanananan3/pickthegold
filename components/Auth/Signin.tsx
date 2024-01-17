@@ -57,6 +57,7 @@ const Signin = () => {
           let currentBalance = response.data.balance;
           console.log(response.data.proj_ids);
           let proj_ids = response.data.proj_ids;
+          let proj_ids_str = proj_ids.join(",");
           if (userClass == null) {
             console.log("분반 정보가 없습니다!");
             window.location.href = "/auth/signup";
@@ -64,6 +65,7 @@ const Signin = () => {
             console.log("분반 정보가 있어요~");
             setCookie("userClass", userClass, 7);
             setCookie("currentBalance", currentBalance, 7);
+            setCookie("proj_ids", proj_ids_str, 7);
             console.log(userClass);
             window.location.href = "/";
           }
