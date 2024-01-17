@@ -301,7 +301,7 @@ const Footer = () => {
               className="animate_top"
             >
               <p>
-                &copy; {new Date().getFullYear()} MadCamp
+                &copy; {new Date().getFullYear()} PICK THE GOLD
               </p>
             </motion.div>
 
